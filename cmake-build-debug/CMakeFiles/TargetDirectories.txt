@@ -1,0 +1,3 @@
+C:/Users/ngaud/CLionProjects/Games, Unlimited Games/cmake-build-debug/CMakeFiles/Games__Unlimited_Games.dir
+C:/Users/ngaud/CLionProjects/Games, Unlimited Games/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ngaud/CLionProjects/Games, Unlimited Games/cmake-build-debug/CMakeFiles/rebuild_cache.dir
