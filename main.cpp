@@ -86,57 +86,55 @@ void merge(vector<Game> &games, string sortType, int left, int middle, int right
 	int subArrayOne = middle - left + 1;
 	int subArrayTwo = right - middle;
 
-	// Create temp arrays
-	vector<Game> leftArray(subArrayOne);
-	vector<Game> rightArray(subArrayTwo);
+	// Create temp vector
+	vector<Game> leftVector(subArrayOne);
+	vector<Game> rightVector(subArrayTwo);
 
-	// Copy data to temp arrays leftArray[] and rightArray[]
+	// Copy data to temp vector
 	for (int i = 0; i < subArrayOne; i++)
-		leftArray[i] = games[left + i];
+		leftVector[i] = games[left + i];
 	for (int j = 0; j < subArrayTwo; j++)
-		rightArray[j] = games[middle + 1 + j];
+		rightVector[j] = games[middle + 1 + j];
 
-	int indexOfSubArrayOne = 0;
-	int indexOfSubArrayTwo = 0;
-	int indexOfMergedArray = left;
+	int indexSub1 = 0;
+	int indexSub2 = 0;
+	int indexMerged = left;
 
-	// Merge the temp arrays back into array[left..right]
-	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
+	// Merge the temp arrays back into
+	while (indexSub1 < subArrayOne && indexSub2 < subArrayTwo) {
 		bool condition;
 		if (sortType == "NA") {
-			condition = leftArray[indexOfSubArrayOne].getNA() >= rightArray[indexOfSubArrayTwo].getNA();
+			condition = leftVector[indexSub1].getNA() >= rightVector[indexSub2].getNA();
 		} else if (sortType == "EU") {
-			condition = leftArray[indexOfSubArrayOne].getEU() >= rightArray[indexOfSubArrayTwo].getEU();
+			condition = leftVector[indexSub1].getEU() >= rightVector[indexSub2].getEU();
 		} else if (sortType == "JP") {
-			condition = leftArray[indexOfSubArrayOne].getJP() >= rightArray[indexOfSubArrayTwo].getJP();
+			condition = leftVector[indexSub1].getJP() >= rightVector[indexSub2].getJP();
 		} else if (sortType == "Other") {
-			condition = leftArray[indexOfSubArrayOne].getOther() >= rightArray[indexOfSubArrayTwo].getOther();
+			condition = leftVector[indexSub1].getOther() >= rightVector[indexSub2].getOther();
 		} else {
-			condition = leftArray[indexOfSubArrayOne].getGlobal() >= rightArray[indexOfSubArrayTwo].getGlobal();
+			condition = leftVector[indexSub1].getGlobal() >= rightVector[indexSub2].getGlobal();
 		}
 
 		if (condition) {
-			games[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-			indexOfSubArrayOne++;
+			games[indexMerged] = leftVector[indexSub1];
+			indexSub1++;
 		} else {
-			games[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-			indexOfSubArrayTwo++;
+			games[indexMerged] = rightVector[indexSub2];
+			indexSub2++;
 		}
-		indexOfMergedArray++;
+		indexMerged++;
 	}
 
-	// Copy the remaining elements of left[], if there are any
-	while (indexOfSubArrayOne < subArrayOne) {
-		games[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-		indexOfSubArrayOne++;
-		indexOfMergedArray++;
+	// Copy the remaining elements
+	while (indexSub1 < subArrayOne) {
+		games[indexMerged] = leftVector[indexSub1];
+		indexSub1++;
+		indexMerged++;
 	}
-
-	// Copy the remaining elements of right[], if there are any
-	while (indexOfSubArrayTwo < subArrayTwo) {
-		games[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-		indexOfSubArrayTwo++;
-		indexOfMergedArray++;
+	while (indexSub2 < subArrayTwo) {
+		games[indexMerged] = rightVector[indexSub2];
+		indexSub2++;
+		indexMerged++;
 	}
 }
 
