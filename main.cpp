@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <fstream>
+#include <sstream>
 using namespace std::chrono;
 using namespace  std;
 
@@ -150,9 +152,62 @@ void mergeSort (vector<Game> &games, string sortType, int start, int end) {
 
 }
 
+// function to help parse the data
+// referenced: https://www.geeksforgeeks.org/working-csv-files-python/
+
+vector<Game> parseCSV(const string& filePath) {
+    vector<Game> objects;
+    ifstream file(filePath);
+    string line;
+
+    if (!file.is_open()) {
+        cout << "error" << endl;
+    }
+
+    getline(file, line);
+
+    while(getline(file, line)) {
+        istringstream ss(line);
+        string Srank, name, platform, year, genre, publisher;
+        string SnaSale, SeuSale, SjpSale, SotherSale, SglobalSale; //string : int for stoi later sorry for weird name convention
+        // Rank,Name,Platform,Year,Genre,Publisher,NA_Sales,EU_Sales,JP_Sales,Other_Sales,Global_Sales (just for my reference)
+        // using getline to take in each line, then check for comma before going to next variable
+        getline(ss, Srank,',');
+        getline(ss, name, ',');
+        getline(ss, platform, ',');
+        getline(ss, year, ',');
+        getline(ss, genre, ',');
+        getline(ss, publisher, ',');
+        getline(ss, SnaSale, ',');
+        getline(ss, SeuSale, ',');
+        getline(ss, SjpSale, ',');
+        getline(ss, SotherSale, ',');
+        getline(ss, SglobalSale, ',');
+
+        // convert from string to int for the variables that need it
+        try {
+            int rank = stoi(Srank);
+            int naSale = stoi(SnaSale);
+            int euSale = stoi(SeuSale);
+            int jpSale = stoi(SjpSale);
+            int otherSale = stoi(SotherSale);
+            int globalSale = stoi(SglobalSale);
+
+            // make the object and then push back into object vector
+            Game obj(rank, name, platform, year, genre, publisher, naSale, euSale, jpSale, otherSale, globalSale);
+            objects.push_back(obj);
+        } catch (invalid_argument& e) {
+            cout << "conversion" << e.what() << endl;
+        } catch (out_of_range& e) {
+            cout << "oor" << e.what() << endl;
+        }
+    }
+    return objects;
+}
 
 int main() {
-	vector<Game> gamesVector; //Games get added here after data is parsed
+    string filePath = "../vgsales.csv"; // not working yet idk whats wrong
+	vector<Game> gamesVector = parseCSV(filePath); //Games get added here after data is parsed
 	vector<Game> userVector; //This is the vector that will be sorted and returned
 	string sortType; //This should be either NA, EU, JP, or Other
 	string userPlatform;
@@ -169,6 +224,23 @@ int main() {
 
 
 	//all alyssa stuff
+    // this prints out all of the data
+    for (int i = 0; i < 40; i++) { // limit to 40 cuz so much data!!!!!
+        cout << "Rank: " << gamesVector[i].getRank()
+                  << ", Name: " << gamesVector[i].getName()
+                  << ", Platform: " << gamesVector[i].getPlatform()
+                  << ", Year: " << gamesVector[i].getYear()
+                  << ", Genre: " << gamesVector[i].getGenre()
+                  << ", Publisher: " << gamesVector[i].getPublisher()
+                  << ", NA Sales: " << gamesVector[i].getNA()
+                  << ", EU Sales: " << gamesVector[i].getEU()
+                  << ", JP Sales: " << gamesVector[i].getJP()
+                  << ", Other Sales: " << gamesVector[i].getOther()
+                  << ", Global Sales: " << gamesVector[i].getGlobal()
+                  << endl;
+        cout << "-----------------------------" << endl; // this is bc i am blind af
+    }
+
 
 
 
@@ -180,23 +252,23 @@ int main() {
 	//all nick stuff
 
 	//Go through all of the games and add based on specifications
-	for (int i = 0; i <gamesVector.size(); i++) {
-		if (userPlatform == gamesVector[i].getPlatform() || userGenre == gamesVector[i].getGenre() || userYear == gamesVector[i].getYear()) {
-			userVector.push_back(gamesVector[i]);
-		}
-	}
-
-	//Mergesort the userVector and time it
-	auto mergeStart = high_resolution_clock::now();
-	mergeSort(userVector, sortType, 0, userVector.size()-1);
-	auto mergeStop = high_resolution_clock::now();
-	auto mergeTime = duration_cast<microseconds>(mergeStop - mergeStart);
-
-	cout << "Merge time: " << mergeTime.count() << " nanoseconds" << endl;
-	for (int i = 0; i < userVector.size(); i++) {
-		cout << userVector[i].getName() << endl;
-	}
-
+//	for (int i = 0; i <gamesVector.size(); i++) {
+//		if (userPlatform == gamesVector[i].getPlatform() || userGenre == gamesVector[i].getGenre() || userYear == gamesVector[i].getYear()) {
+//			userVector.push_back(gamesVector[i]);
+//		}
+//	}
+//
+//	//Mergesort the userVector and time it
+//	auto mergeStart = high_resolution_clock::now();
+//	mergeSort(userVector, sortType, 0, userVector.size()-1);
+//	auto mergeStop = high_resolution_clock::now();
+//	auto mergeTime = duration_cast<microseconds>(mergeStop - mergeStart);
+//
+//	cout << "Merge time: " << mergeTime.count() << " nanoseconds" << endl;
+//	for (int i = 0; i < userVector.size(); i++) {
+//		cout << userVector[i].getName() << endl;
+//	}
+//
 	return 0;
 
 }
