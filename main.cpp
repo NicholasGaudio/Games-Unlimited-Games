@@ -194,12 +194,10 @@ vector<Game> parseCSV(const string& filePath) {
             int globalSale = stoi(SglobalSale);
 
             // make the object and then push back into object vector
-            Game obj(rank, name, platform, year, genre, publisher, naSale, euSale, jpSale, otherSale, globalSale);
-            objects.push_back(obj);
+            Game games(rank, name, platform, year, genre, publisher, naSale, euSale, jpSale, otherSale, globalSale);
+            objects.push_back(games);
         } catch (invalid_argument& e) {
-            cout << "conversion" << e.what() << endl;
-        } catch (out_of_range& e) {
-            cout << "oor" << e.what() << endl;
+            continue; // there is a conversion error but i am skipping it here, im not 100
         }
     }
     return objects;
@@ -213,6 +211,7 @@ int main() {
 	string userPlatform;
 	string userGenre;
 	string userYear;
+
 	//These were examples that I did to test the Sort
 	// Game game1(1, "game1", "nickbox", "2004", "nickgenre", "nicktendo", 100, 10, 2, 4, 116);
 	// Game game2(2, "game2", "nickbox", "2004", "nickgenre", "nicktendo", 600, 10, 2, 4, 116);
@@ -222,30 +221,32 @@ int main() {
 	// gamesVector.push_back(game3);
 
 
-
+    cout << "Welcome to Team BOGO'S: Games, UNLIMTIED Games" << endl;
 	//all alyssa stuff
     // this prints out all of the data
-    for (int i = 0; i < 40; i++) { // limit to 40 cuz so much data!!!!!
-        cout << "Rank: " << gamesVector[i].getRank()
-                  << ", Name: " << gamesVector[i].getName()
-                  << ", Platform: " << gamesVector[i].getPlatform()
-                  << ", Year: " << gamesVector[i].getYear()
-                  << ", Genre: " << gamesVector[i].getGenre()
-                  << ", Publisher: " << gamesVector[i].getPublisher()
-                  << ", NA Sales: " << gamesVector[i].getNA()
-                  << ", EU Sales: " << gamesVector[i].getEU()
-                  << ", JP Sales: " << gamesVector[i].getJP()
-                  << ", Other Sales: " << gamesVector[i].getOther()
-                  << ", Global Sales: " << gamesVector[i].getGlobal()
-                  << endl;
-        cout << "-----------------------------" << endl; // this is bc i am blind af
+    for (int i = 0; i < 50; i++) { // limit to 50 cuz so much data
+
+        // checking to see if everything is correctly a string and integer
+        cout << "Rank (" << typeid(gamesVector[i].getRank()).name() << "): " << gamesVector[i].getRank() << endl
+             << "Name (" << typeid(gamesVector[i].getName()).name() << "): " << gamesVector[i].getName() << endl
+             << "Platform (" << typeid(gamesVector[i].getPlatform()).name() << "): " << gamesVector[i].getPlatform()
+             << endl
+             << "Year (" << typeid(gamesVector[i].getYear()).name() << "): " << gamesVector[i].getYear() << endl
+             << "Genre (" << typeid(gamesVector[i].getGenre()).name() << "): " << gamesVector[i].getGenre() << endl
+             << "Publisher (" << typeid(gamesVector[i].getPublisher()).name() << "): " << gamesVector[i].getPublisher()
+             << endl
+             << "NA Sales (" << typeid(gamesVector[i].getNA()).name() << "): " << gamesVector[i].getNA() << endl
+             << "EU Sales (" << typeid(gamesVector[i].getEU()).name() << "): " << gamesVector[i].getEU() << endl
+             << "JP Sales (" << typeid(gamesVector[i].getJP()).name() << "): " << gamesVector[i].getJP() << endl
+             << "Other Sales (" << typeid(gamesVector[i].getOther()).name() << "): " << gamesVector[i].getOther()
+             << endl
+             << "Global Sales (" << typeid(gamesVector[i].getGlobal()).name() << "): " << gamesVector[i].getGlobal()
+             << endl
+             << "-----------------------------" << endl;
     }
 
 
-
-
 	//all jacob stuff
-    cout << "Welcome to Team BOGO'S: Games, UNLIMTIED Games" << endl;
 
 
 
