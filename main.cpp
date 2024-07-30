@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -14,11 +15,11 @@ private:
 	string year; //I don't think year actually need to be an int because its not being compared
 	string genre;
 	string publisher;
-	int northAmericaSales;
-	int europeSales;
-	int japanSales;
-	int otherSales;
-	int globalSales;
+	float northAmericaSales;
+	float europeSales;
+	float japanSales;
+	float otherSales;
+	float globalSales;
 public:
 	Game() {
 		rank = 0;
@@ -35,7 +36,7 @@ public:
 	}
 
 	Game(int rank, string name, string platform, string year, string genre, string publisher,
-		int northAmericaSales, int europeSales, int japanSales, int otherSales, int globalSales) {
+		float northAmericaSales, float europeSales, float japanSales, float otherSales, float globalSales) {
 		this -> rank = rank;
 		this -> name = name;
 		this -> platform = platform;
@@ -67,21 +68,36 @@ public:
 	string getPublisher() {
 		return publisher;
 	}
-	int getNA() {
+	float getNA() {
 		return northAmericaSales;
 	}
-	int getEU() {
+	float getEU() {
 		return europeSales;
 	}
-	int getJP() {
+	float getJP() {
 		return japanSales;
 	}
-	int getOther() {
+	float getOther() {
 		return otherSales;
 	}
-	int getGlobal() {
+	float getGlobal() {
 		return globalSales;
 	}
+
+	float getSales(const string& sortType) const {
+		if (sortType == "NA") {
+			return northAmericaSales;
+		} else if (sortType == "EU") {
+			return europeSales;
+		} else if (sortType == "JP") {
+			return japanSales;
+		} else if (sortType == "Other") {
+			return otherSales;
+		} else {
+			return globalSales; // Default case for "Global"
+		}
+	}
+
 };
 
 void merge(vector<Game> &games, string sortType, int left, int middle, int right) {
@@ -152,9 +168,41 @@ void mergeSort (vector<Game> &games, string sortType, int start, int end) {
 
 }
 
+// Swap function
+void swap(Game &a, Game &b) {
+	Game temp = a;
+	a = b;
+	b = temp;
+}
+
+// Partition function for Quicksort
+int partition(vector<Game> &games, int low, int high, const string& sortType) {
+	float pivotValue = games[high].getSales(sortType); // Choosing the last element's sales as pivot
+	int i = low - 1; // Index of smaller element
+
+	for (int j = low; j < high; j++) {
+		if (games[j].getSales(sortType) >= pivotValue) {
+			i++;
+			swap(games[i], games[j]);
+		}
+	}
+	swap(games[i + 1], games[high]);
+	return i + 1;
+}
+
+// Quicksort function
+void quicksort(vector<Game> &games, int low, int high, const string& sortType) {
+	if (low < high) {
+		int pi = partition(games, low, high, sortType); // Partitioning index
+
+		// Recursively sort elements before and after partition
+		quicksort(games, low, pi - 1, sortType);
+		quicksort(games, pi + 1, high, sortType);
+	}
+}
+
 // function to help parse the data
 // referenced: https://www.geeksforgeeks.org/working-csv-files-python/
-
 vector<Game> parseCSV(const string& filePath) {
     vector<Game> objects;
     ifstream file(filePath);
@@ -187,11 +235,11 @@ vector<Game> parseCSV(const string& filePath) {
         // convert from string to int for the variables that need it
         try {
             int rank = stoi(Srank);
-            int naSale = stoi(SnaSale);
-            int euSale = stoi(SeuSale);
-            int jpSale = stoi(SjpSale);
-            int otherSale = stoi(SotherSale);
-            int globalSale = stoi(SglobalSale);
+            float naSale = stof(SnaSale);
+            float euSale = stof(SeuSale);
+            float jpSale = stof(SjpSale);
+            float otherSale = stof(SotherSale);
+            float globalSale = stof(SglobalSale);
 
             // make the object and then push back into object vector
             Game games(rank, name, platform, year, genre, publisher, naSale, euSale, jpSale, otherSale, globalSale);
@@ -212,38 +260,31 @@ int main() {
 	string userGenre;
 	string userYear;
 
-	//These were examples that I did to test the Sort
-	// Game game1(1, "game1", "nickbox", "2004", "nickgenre", "nicktendo", 100, 10, 2, 4, 116);
-	// Game game2(2, "game2", "nickbox", "2004", "nickgenre", "nicktendo", 600, 10, 2, 4, 116);
-	// Game game3(2, "game3", "nickbox", "2004", "nickgenre", "nicktendo", 400, 10, 2, 4, 116);
-	// gamesVector.push_back(game1);
-	// gamesVector.push_back(game2);
-	// gamesVector.push_back(game3);
 
 
     cout << "Welcome to Team BOGO'S: Games, UNLIMTIED Games" << endl;
 	//all alyssa stuff
     // this prints out all of the data
-    for (int i = 0; i < 50; i++) { // limit to 50 cuz so much data
-
-        // checking to see if everything is correctly a string and integer
-        cout << "Rank (" << typeid(gamesVector[i].getRank()).name() << "): " << gamesVector[i].getRank() << endl
-             << "Name (" << typeid(gamesVector[i].getName()).name() << "): " << gamesVector[i].getName() << endl
-             << "Platform (" << typeid(gamesVector[i].getPlatform()).name() << "): " << gamesVector[i].getPlatform()
-             << endl
-             << "Year (" << typeid(gamesVector[i].getYear()).name() << "): " << gamesVector[i].getYear() << endl
-             << "Genre (" << typeid(gamesVector[i].getGenre()).name() << "): " << gamesVector[i].getGenre() << endl
-             << "Publisher (" << typeid(gamesVector[i].getPublisher()).name() << "): " << gamesVector[i].getPublisher()
-             << endl
-             << "NA Sales (" << typeid(gamesVector[i].getNA()).name() << "): " << gamesVector[i].getNA() << endl
-             << "EU Sales (" << typeid(gamesVector[i].getEU()).name() << "): " << gamesVector[i].getEU() << endl
-             << "JP Sales (" << typeid(gamesVector[i].getJP()).name() << "): " << gamesVector[i].getJP() << endl
-             << "Other Sales (" << typeid(gamesVector[i].getOther()).name() << "): " << gamesVector[i].getOther()
-             << endl
-             << "Global Sales (" << typeid(gamesVector[i].getGlobal()).name() << "): " << gamesVector[i].getGlobal()
-             << endl
-             << "-----------------------------" << endl;
-    }
+    // for (int i = 0; i < 50; i++) { // limit to 50 cuz so much data
+    //
+    //     // checking to see if everything is correctly a string and integer
+    //     cout << "Rank (" << typeid(gamesVector[i].getRank()).name() << "): " << gamesVector[i].getRank() << endl
+    //          << "Name (" << typeid(gamesVector[i].getName()).name() << "): " << gamesVector[i].getName() << endl
+    //          << "Platform (" << typeid(gamesVector[i].getPlatform()).name() << "): " << gamesVector[i].getPlatform()
+    //          << endl
+    //          << "Year (" << typeid(gamesVector[i].getYear()).name() << "): " << gamesVector[i].getYear() << endl
+    //          << "Genre (" << typeid(gamesVector[i].getGenre()).name() << "): " << gamesVector[i].getGenre() << endl
+    //          << "Publisher (" << typeid(gamesVector[i].getPublisher()).name() << "): " << gamesVector[i].getPublisher()
+    //          << endl
+    //          << "NA Sales (" << typeid(gamesVector[i].getNA()).name() << "): " << gamesVector[i].getNA() << endl
+    //          << "EU Sales (" << typeid(gamesVector[i].getEU()).name() << "): " << gamesVector[i].getEU() << endl
+    //          << "JP Sales (" << typeid(gamesVector[i].getJP()).name() << "): " << gamesVector[i].getJP() << endl
+    //          << "Other Sales (" << typeid(gamesVector[i].getOther()).name() << "): " << gamesVector[i].getOther()
+    //          << endl
+    //          << "Global Sales (" << typeid(gamesVector[i].getGlobal()).name() << "): " << gamesVector[i].getGlobal()
+    //          << endl
+    //          << "-----------------------------" << endl;
+    // }
 
 
 	//all jacob stuff
@@ -253,23 +294,32 @@ int main() {
 	//all nick stuff
 
 	//Go through all of the games and add based on specifications
-//	for (int i = 0; i <gamesVector.size(); i++) {
-//		if (userPlatform == gamesVector[i].getPlatform() || userGenre == gamesVector[i].getGenre() || userYear == gamesVector[i].getYear()) {
-//			userVector.push_back(gamesVector[i]);
-//		}
-//	}
-//
-//	//Mergesort the userVector and time it
-//	auto mergeStart = high_resolution_clock::now();
-//	mergeSort(userVector, sortType, 0, userVector.size()-1);
-//	auto mergeStop = high_resolution_clock::now();
-//	auto mergeTime = duration_cast<microseconds>(mergeStop - mergeStart);
-//
-//	cout << "Merge time: " << mergeTime.count() << " nanoseconds" << endl;
-//	for (int i = 0; i < userVector.size(); i++) {
-//		cout << userVector[i].getName() << endl;
-//	}
-//
+	// for (int i = 0; i <gamesVector.size(); i++) {
+	// 	if (userPlatform == gamesVector[i].getPlatform() || userGenre == gamesVector[i].getGenre() || userYear == gamesVector[i].getYear()) {
+	// 		userVector.push_back(gamesVector[i]);
+	// 	}
+	// }
+	//
+	// //Mergesort the userVector and time it
+	// auto mergeStart = high_resolution_clock::now();
+	// mergeSort(gamesVector, "NA", 0, gamesVector.size()-1);
+	// auto mergeStop = high_resolution_clock::now();
+	// auto mergeTime = duration_cast<milliseconds>(mergeStop - mergeStart);
+	// cout << "Merge Sort Took: " << mergeTime.count() << " milliseconds" << endl;
+	// for (int i=0; i <50; i++) {
+	// 	cout << i+1 << ". " << gamesVector[i].getName() << "(" << gamesVector[i].getNA() << ")" << endl;
+	// }
+	//
+	// auto quicksortStart = high_resolution_clock::now();
+	// quicksort(gamesVector, 0, gamesVector.size() - 1, "NA");
+	// auto quicksortStop = high_resolution_clock::now();
+	// auto quicksortTime = duration_cast<milliseconds>(quicksortStop - quicksortStart);
+	// cout << "Quicksort Took: " << quicksortTime.count() << " milliseconds" << endl;
+	// for (int i=0; i <50; i++) {
+	// 	cout << i+1 << ". " << gamesVector[i].getName() << "(" << gamesVector[i].getNA() << ")" << endl;
+	// }
+
+
 	return 0;
 
 }
