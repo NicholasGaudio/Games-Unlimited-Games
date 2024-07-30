@@ -4,6 +4,7 @@
 #include <chrono>
 #include <fstream>
 #include <sstream>
+#include <random>  // For random number generation
 using namespace std::chrono;
 using namespace  std;
 
@@ -251,6 +252,31 @@ vector<Game> parseCSV(const string& filePath) {
     return objects;
 }
 
+// BogoSort function
+// BogoSort function
+bool isSorted(const vector<Game>& games, const string& sortType) {
+	for (size_t i = 1; i < games.size(); ++i) {
+		if (games[i].getSales(sortType) > games[i - 1].getSales(sortType)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+void bogoSort(vector<Game>& games, const string& sortType) {
+	std::default_random_engine rng(static_cast<unsigned int>(std::time(nullptr)));
+	std::uniform_int_distribution<size_t> dist(0, games.size() - 1);
+	int swapCount = 0;  // Counter for swaps
+
+	while (!isSorted(games, sortType)) {
+		std::shuffle(games.begin(), games.end(), rng);
+		swapCount++;  // Increment swap count for each shuffle
+		cout << "Number of shuffles (swaps): " << swapCount << endl;2
+	}
+
+	cout << "Number of shuffles (swaps): " << swapCount << endl;
+}
+
 int main() {
     string filePath = "../vgsales.csv"; // not working yet idk whats wrong
 	vector<Game> gamesVector = parseCSV(filePath); //Games get added here after data is parsed
@@ -319,6 +345,18 @@ int main() {
 	// 	cout << i+1 << ". " << gamesVector[i].getName() << "(" << gamesVector[i].getNA() << ")" << endl;
 	// }
 
+
+	//It's BogoTime
+	auto bogoSortStart = high_resolution_clock::now();
+	bogoSort(gamesVector, "NA");
+	auto bogoSortStop = high_resolution_clock::now();
+	auto bogoSortTime = duration_cast<seconds>(bogoSortStop - bogoSortStart);
+	cout << "BogoSort Took: " << bogoSortTime.count() << " seconds" << endl;
+
+	// Print sorted games
+	for (int i = 0; i < 50; i++) {
+		cout << i + 1 << ". " << gamesVector[i].getName() << " (" << gamesVector[i].getNA() << ")" << endl;
+	}
 
 	return 0;
 
