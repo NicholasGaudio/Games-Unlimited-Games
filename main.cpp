@@ -300,30 +300,29 @@ int main() {
 	string userYear;
 
 
-
-    cout << "Welcome to Team BOGO'S: Games, UNLIMTIED Games" << endl;
+	cout << "Welcome to Team BOGO'S: Games, UNLIMTIED Games" << endl;
 	//all alyssa stuff
-    // this prints out all of the data
-    // for (int i = 0; i < 50; i++) { // limit to 50 cuz so much data
-    //
-    //     // checking to see if everything is correctly a string and integer
-    //     cout << "Rank (" << typeid(gamesVector[i].getRank()).name() << "): " << gamesVector[i].getRank() << endl
-    //          << "Name (" << typeid(gamesVector[i].getName()).name() << "): " << gamesVector[i].getName() << endl
-    //          << "Platform (" << typeid(gamesVector[i].getPlatform()).name() << "): " << gamesVector[i].getPlatform()
-    //          << endl
-    //          << "Year (" << typeid(gamesVector[i].getYear()).name() << "): " << gamesVector[i].getYear() << endl
-    //          << "Genre (" << typeid(gamesVector[i].getGenre()).name() << "): " << gamesVector[i].getGenre() << endl
-    //          << "Publisher (" << typeid(gamesVector[i].getPublisher()).name() << "): " << gamesVector[i].getPublisher()
-    //          << endl
-    //          << "NA Sales (" << typeid(gamesVector[i].getNA()).name() << "): " << gamesVector[i].getNA() << endl
-    //          << "EU Sales (" << typeid(gamesVector[i].getEU()).name() << "): " << gamesVector[i].getEU() << endl
-    //          << "JP Sales (" << typeid(gamesVector[i].getJP()).name() << "): " << gamesVector[i].getJP() << endl
-    //          << "Other Sales (" << typeid(gamesVector[i].getOther()).name() << "): " << gamesVector[i].getOther()
-    //          << endl
-    //          << "Global Sales (" << typeid(gamesVector[i].getGlobal()).name() << "): " << gamesVector[i].getGlobal()
-    //          << endl
-    //          << "-----------------------------" << endl;
-    // }
+	// this prints out all of the data
+	// for (int i = 0; i < 50; i++) { // limit to 50 cuz so much data
+	//
+	//     // checking to see if everything is correctly a string and integer
+	//     cout << "Rank (" << typeid(gamesVector[i].getRank()).name() << "): " << gamesVector[i].getRank() << endl
+	//          << "Name (" << typeid(gamesVector[i].getName()).name() << "): " << gamesVector[i].getName() << endl
+	//          << "Platform (" << typeid(gamesVector[i].getPlatform()).name() << "): " << gamesVector[i].getPlatform()
+	//          << endl
+	//          << "Year (" << typeid(gamesVector[i].getYear()).name() << "): " << gamesVector[i].getYear() << endl
+	//          << "Genre (" << typeid(gamesVector[i].getGenre()).name() << "): " << gamesVector[i].getGenre() << endl
+	//          << "Publisher (" << typeid(gamesVector[i].getPublisher()).name() << "): " << gamesVector[i].getPublisher()
+	//          << endl
+	//          << "NA Sales (" << typeid(gamesVector[i].getNA()).name() << "): " << gamesVector[i].getNA() << endl
+	//          << "EU Sales (" << typeid(gamesVector[i].getEU()).name() << "): " << gamesVector[i].getEU() << endl
+	//          << "JP Sales (" << typeid(gamesVector[i].getJP()).name() << "): " << gamesVector[i].getJP() << endl
+	//          << "Other Sales (" << typeid(gamesVector[i].getOther()).name() << "): " << gamesVector[i].getOther()
+	//          << endl
+	//          << "Global Sales (" << typeid(gamesVector[i].getGlobal()).name() << "): " << gamesVector[i].getGlobal()
+	//          << endl
+	//          << "-----------------------------" << endl;
+	// }
 
 
 	//all jacob stuff
@@ -356,7 +355,7 @@ int main() {
 	cont.setPosition(250, 400);
 	cont.setTexture(unpressed1);
 
-	while(window.isOpen()) {
+	while (window.isOpen()) {
 		sf::Event event;
 
 		while (window.pollEvent(event)) {
@@ -444,12 +443,12 @@ int main() {
 
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 2; j++) {
-			itr1->setPosition((360*i + 70), (270*j + 120));
+			itr1->setPosition((360 * i + 70), (270 * j + 120));
 			itr1++;
 		}
 	}
 
-	while(region_window.isOpen()) {
+	while (region_window.isOpen()) {
 		sf::Event event;
 
 		while (region_window.pollEvent(event)) {
@@ -460,22 +459,21 @@ int main() {
 						itr->setTexture(pressed1);
 					}
 					if (event.mouseButton.y >= 390 && event.mouseButton.y <= 540) {
-						auto itr = sprites1.begin()+1;
+						auto itr = sprites1.begin() + 1;
 						itr->setTexture(pressed1);
 					}
 				}
 				if (event.mouseButton.x >= 430 && event.mouseButton.x <= 730) {
 					if (event.mouseButton.y >= 120 && event.mouseButton.y <= 270) {
-						auto itr = sprites1.begin()+2;
+						auto itr = sprites1.begin() + 2;
 						itr->setTexture(pressed1);
 					}
 					if (event.mouseButton.y >= 390 && event.mouseButton.y <= 540) {
-						auto itr = sprites1.begin()+3;
+						auto itr = sprites1.begin() + 3;
 						itr->setTexture(pressed1);
 					}
 				}
-			}
-			else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
+			} else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
 				if (event.mouseButton.x >= 70 && event.mouseButton.x <= 370) {
 					if (event.mouseButton.y >= 120 && event.mouseButton.y <= 270) {
 						sortType = "NA";
@@ -848,14 +846,14 @@ int main() {
 
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 8; j++) {
-			itr2->setPosition((200*i + 50), (60*j + 120));
+			itr2->setPosition((200 * i + 50), (60 * j + 120));
 			itr2++;
 		}
 	}
 
 	userPlatform = "";
 
-	while(platform_window.isOpen()) {
+	while (platform_window.isOpen()) {
 		sf::Event event;
 
 		while (platform_window.pollEvent(event)) {
@@ -866,7 +864,7 @@ int main() {
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 180 && event.mouseButton.y <= 230) {
-						auto itr = sprites2.begin()+1;
+						auto itr = sprites2.begin() + 1;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 240 && event.mouseButton.y <= 290) {
@@ -996,8 +994,7 @@ int main() {
 						itr->setTexture(pressed2);
 					}
 				}
-			}
-			else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
+			} else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
 				for (auto itr = sprites2.begin(); itr != sprites2.end(); itr++) {
 					itr->setTexture(unpressed2);
 				}
@@ -1227,14 +1224,14 @@ int main() {
 
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 4; j++) {
-			itr3->setPosition((250*i + 100), (95*j + 120));
+			itr3->setPosition((250 * i + 100), (95 * j + 120));
 			itr3++;
 		}
 	}
 
 	itr3++->setPosition(350, 500);
 
-	while(genre_window.isOpen()) {
+	while (genre_window.isOpen()) {
 		sf::Event event;
 
 		while (genre_window.pollEvent(event)) {
@@ -1245,55 +1242,55 @@ int main() {
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 215 && event.mouseButton.y <= 265) {
-						auto itr = sprites3.begin()+1;
+						auto itr = sprites3.begin() + 1;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 310 && event.mouseButton.y <= 360) {
-						auto itr = sprites3.begin()+2;
+						auto itr = sprites3.begin() + 2;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 405 && event.mouseButton.y <= 455) {
-						auto itr = sprites3.begin()+3;
+						auto itr = sprites3.begin() + 3;
 						itr->setTexture(pressed2);
 					}
 				}
 				if (event.mouseButton.x >= 350 && event.mouseButton.x <= 450) {
 					if (event.mouseButton.y >= 120 && event.mouseButton.y <= 170) {
-						auto itr = sprites3.begin()+4;
+						auto itr = sprites3.begin() + 4;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 215 && event.mouseButton.y <= 265) {
-						auto itr = sprites3.begin()+5;
+						auto itr = sprites3.begin() + 5;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 310 && event.mouseButton.y <= 360) {
-						auto itr = sprites3.begin()+6;
+						auto itr = sprites3.begin() + 6;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 405 && event.mouseButton.y <= 455) {
-						auto itr = sprites3.begin()+7;
+						auto itr = sprites3.begin() + 7;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 500 && event.mouseButton.y <= 550) {
-						auto itr = sprites3.begin()+12;
+						auto itr = sprites3.begin() + 12;
 						itr->setTexture(pressed2);
 					}
 				}
 				if (event.mouseButton.x >= 600 && event.mouseButton.x <= 700) {
 					if (event.mouseButton.y >= 120 && event.mouseButton.y <= 170) {
-						auto itr = sprites3.begin()+8;
+						auto itr = sprites3.begin() + 8;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 215 && event.mouseButton.y <= 265) {
-						auto itr = sprites3.begin()+9;
+						auto itr = sprites3.begin() + 9;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 310 && event.mouseButton.y <= 360) {
-						auto itr = sprites3.begin()+10;
+						auto itr = sprites3.begin() + 10;
 						itr->setTexture(pressed2);
 					}
 					if (event.mouseButton.y >= 405 && event.mouseButton.y <= 455) {
-						auto itr = sprites3.begin()+11;
+						auto itr = sprites3.begin() + 11;
 						itr->setTexture(pressed2);
 					}
 				}
@@ -1377,10 +1374,10 @@ int main() {
 	//all nick stuff
 
 	//Go through all the games and add based on specifications
-	for (int i = 0; i <gamesVector.size(); i++) {
-	//	 	 if (userPlatform == gamesVector[i].getPlatform() || userGenre == gamesVector[i].getGenre() || userYear == gamesVector[i].getYear()) {
-	//			  userVector.push_back(gamesVector[i]);
-	//	 	 }
+	for (int i = 0; i < gamesVector.size(); i++) {
+		//	 	 if (userPlatform == gamesVector[i].getPlatform() || userGenre == gamesVector[i].getGenre() || userYear == gamesVector[i].getYear()) {
+		//			  userVector.push_back(gamesVector[i]);
+		//	 	 }
 		if (!userPlatform.empty()) {
 			if (!userGenre.empty()) { // both
 				if (userPlatform == gamesVector[i].getPlatform() && userGenre == gamesVector[i].getGenre())
@@ -1401,36 +1398,38 @@ int main() {
 
 	}
 
-	 //Mergesort the userVector and time it
-	 auto mergeStart = high_resolution_clock::now();
-	 mergeSort(userVector, sortType, 0, userVector.size()-1);
-	 auto mergeStop = high_resolution_clock::now();
-	 auto mergeTime = duration_cast<milliseconds>(mergeStop - mergeStart);
-	 cout << "Merge Sort Took: " << mergeTime.count() << " milliseconds" << endl;
-	 if (userVector.size() >= 20) {
-		 for (int i = 0; i < 20; i++) {
-			 cout << i + 1 << ". " << userVector[i].getName() << endl;
-		 }
-	 } else {
-		 int count = 1;
-		 for (auto itr = userVector.begin(); itr != userVector.end(); itr++) {
-			 cout << count++ << ". " << itr->getName() << endl;
-		 }
-	 }
-
-	 auto quicksortStart = high_resolution_clock::now();
-	 quicksort(userVector, 0, userVector.size() - 1, sortType);
-	 auto quicksortStop = high_resolution_clock::now();
-	 auto quicksortTime = duration_cast<milliseconds>(quicksortStop - quicksortStart);
-	 cout << "Quicksort Took: " << quicksortTime.count() << " milliseconds" << endl;
-	if (userVector.size() >= 20) {
+	//Mergesort the userVector and time it
+	auto mergeStart = high_resolution_clock::now();
+	mergeSort(userVector, sortType, 0, userVector.size() - 1);
+	auto mergeStop = high_resolution_clock::now();
+	auto mergeTime = duration_cast<milliseconds>(mergeStop - mergeStart);
+	cout << "Merge Sort Took: " << mergeTime.count() << " milliseconds" << endl;
+	if (userVector.size() < 20) {
+		int count = 1;
+		for (auto itr = userVector.begin(); itr != userVector.end(); itr++) {
+			cout << count << ". " << itr->getName() << endl;
+			count++;
+		}
+	} else {
 		for (int i = 0; i < 20; i++) {
 			cout << i + 1 << ". " << userVector[i].getName() << endl;
 		}
-	} else {
+	}
+
+	auto quicksortStart = high_resolution_clock::now();
+	quicksort(userVector, 0, userVector.size() - 1, sortType);
+	auto quicksortStop = high_resolution_clock::now();
+	auto quicksortTime = duration_cast<milliseconds>(quicksortStop - quicksortStart);
+	cout << "Quicksort Took: " << quicksortTime.count() << " milliseconds" << endl;
+	if (userVector.size() < 20) {
 		int count = 1;
 		for (auto itr = userVector.begin(); itr != userVector.end(); itr++) {
-			cout << count++ << ". " << itr->getName() << endl;
+			cout << count << ". " << itr->getName() << endl;
+			count++;
+		}
+	} else {
+		for (int i = 0; i < 20; i++) {
+			cout << i + 1 << ". " << userVector[i].getName() << endl;
 		}
 	}
 
@@ -1481,123 +1480,124 @@ int main() {
 	textConfig(text55, font, 10, 25, 240);
 	textConfig(text56, font, 10, 25, 340);
 	textConfig(text57, font, 10, 25, 440);
-	textConfig(text58, font, 10, 225,  60);
+	textConfig(text58, font, 10, 225, 60);
 	textConfig(text59, font, 10, 225, 160);
 	textConfig(text60, font, 10, 225, 260);
 	textConfig(text61, font, 10, 225, 360);
 	textConfig(text62, font, 10, 225, 460);
-	textConfig(text63, font, 10, 425,  40);
+	textConfig(text63, font, 10, 425, 40);
 	textConfig(text64, font, 10, 425, 140);
 	textConfig(text65, font, 10, 425, 240);
 	textConfig(text66, font, 10, 425, 340);
 	textConfig(text67, font, 10, 425, 440);
-	textConfig(text68, font, 10, 625,  60);
+	textConfig(text68, font, 10, 625, 60);
 	textConfig(text69, font, 10, 625, 160);
 	textConfig(text70, font, 10, 625, 260);
 	textConfig(text71, font, 10, 625, 360);
 	textConfig(text72, font, 10, 625, 460);
 	textConfig(text73, font, 12, 200, 550);
 	textConfig(text74, font, 12, 600, 550);
-	try {
+	if (userVector.size() > 0) {
 		text53.setString(" 1. " + userVector[0].getName());
-	} catch (exception) {
+	}
+	else
 		text53.setString(" 1. ");
-	}
-	try {
+	if (userVector.size() > 1) {
 		text54.setString(" 2. " + userVector[1].getName());
-	} catch (exception) {
+	}
+	else
 		text54.setString(" 2. ");
-	}
-	try {
+	if (userVector.size() > 2) {
 		text55.setString(" 3. " + userVector[2].getName());
-	} catch (exception) {
+	}
+	else
 		text55.setString(" 3. ");
-	}
-	try {
+	if (userVector.size() > 3) {
 		text56.setString(" 4. " + userVector[3].getName());
-	} catch (exception) {
+	}
+	else
 		text56.setString(" 4. ");
-	}
-	try {
+	if (userVector.size() > 4) {
 		text57.setString(" 5. " + userVector[4].getName());
-	} catch (exception) {
+	}
+	else
 		text57.setString(" 5. ");
-	}
-	try {
+	if (userVector.size() > 5) {
 		text58.setString(" 6. " + userVector[5].getName());
-	} catch (exception) {
+	}
+	else
 		text58.setString(" 6. ");
-	}
-	try {
+	if (userVector.size() > 6) {
 		text59.setString(" 7. " + userVector[6].getName());
-	} catch (exception) {
+	}
+	else
 		text59.setString(" 7. ");
-	}
-	try {
+	if (userVector.size() > 7) {
 		text60.setString(" 8. " + userVector[7].getName());
-	} catch (exception) {
+	}
+	else
 		text60.setString(" 8. ");
-	}
-	try {
+	if (userVector.size() > 8) {
 		text61.setString(" 9. " + userVector[8].getName());
-	} catch (exception) {
+	}
+	else
 		text61.setString(" 9. ");
-	}
-	try {
+	if (userVector.size() > 9) {
 		text62.setString("10. " + userVector[9].getName());
-	} catch (exception) {
+	}
+	else
 		text62.setString("10. ");
-	}
-	try {
+	if (userVector.size() > 10) {
 		text63.setString("11. " + userVector[10].getName());
-	} catch (exception) {
+	}
+	else
 		text63.setString("11. ");
-	}
-	try {
+	if (userVector.size() > 11) {
 		text64.setString("12. " + userVector[11].getName());
-	} catch (exception) {
+	}
+	else
 		text64.setString("12. ");
-	}
-	try {
+	if (userVector.size() > 12) {
 		text65.setString("13. " + userVector[12].getName());
-	} catch (exception) {
+	}
+	else
 		text65.setString("13. ");
-	}
-	try {
+	if (userVector.size() > 13) {
 		text66.setString("14. " + userVector[13].getName());
-	} catch (exception) {
+	}
+	else
 		text66.setString("14. ");
-	}
-	try {
+	if (userVector.size() > 14) {
 		text67.setString("15. " + userVector[14].getName());
-	} catch (exception) {
+	}
+	else
 		text67.setString("15. ");
-	}
-	try {
+	if (userVector.size() > 15) {
 		text68.setString("16. " + userVector[15].getName());
-	} catch (exception) {
+	}
+	else
 		text68.setString("16. ");
-	}
-	try {
+	if (userVector.size() > 16) {
 		text69.setString("17. " + userVector[16].getName());
-	} catch (exception) {
+	}
+	else
 		text69.setString("17. ");
-	}
-	try {
+	if (userVector.size() > 17) {
 		text70.setString("18. " + userVector[17].getName());
-	} catch (exception) {
+	}
+	else
 		text70.setString("18. ");
-	}
-	try {
+	if (userVector.size() > 18) {
 		text71.setString("19. " + userVector[18].getName());
-	} catch (exception) {
+	}
+	else
 		text71.setString("19. ");
-	}
-	try {
+	if (userVector.size() > 19) {
 		text72.setString("20. " + userVector[19].getName());
-	} catch (exception) {
-		text72.setString("20. ");
 	}
+	else
+		text72.setString("20. ");
+
 	text73.setString("Quicksort Took: " + to_string(quicksortTime.count()) + " milliseconds");
 	text74.setString("Merge Sort Took: " + to_string(mergeTime.count()) + " milliseconds");
 	setText(text73);
