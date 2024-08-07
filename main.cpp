@@ -254,30 +254,30 @@ vector<Game> parseCSV(const string& filePath) {
     return objects;
 }
 
-// BogoSort function
-// BogoSort function
-bool isSorted(const vector<Game>& games, const string& sortType) {
-	for (size_t i = 1; i < games.size(); ++i) {
-		if (games[i].getSales(sortType) > games[i - 1].getSales(sortType)) {
-			return false;
-		}
-	}
-	return true;
-}
-
-void bogoSort(vector<Game>& games, const string& sortType) {
-	std::default_random_engine rng(static_cast<unsigned int>(std::time(nullptr)));
-	std::uniform_int_distribution<size_t> dist(0, games.size() - 1);
-	int swapCount = 0;  // Counter for swaps
-
-	while (!isSorted(games, sortType)) {
-		std::shuffle(games.begin(), games.end(), rng);
-		swapCount++;  // Increment swap count for each shuffle
-		cout << "Number of shuffles (swaps): " << swapCount << endl;
-	}
-
-	cout << "Number of shuffles (swaps): " << swapCount << endl;
-}
+// // BogoSort function
+// // BogoSort function
+//bool isSorted(const vector<Game>& games, const string& sortType) {
+//	for (size_t i = 1; i < games.size(); ++i) {
+//		if (games[i].getSales(sortType) > games[i - 1].getSales(sortType)) {
+//			return false;
+//		}
+//	}
+//	return true;
+//}
+//
+//void bogoSort(vector<Game>& games, const string& sortType) {
+//	std::default_random_engine rng(static_cast<unsigned int>(std::time(nullptr)));
+//	std::uniform_int_distribution<size_t> dist(0, games.size() - 1);
+//	int swapCount = 0;  // Counter for swaps
+//
+//	while (!isSorted(games, sortType)) {
+//		std::shuffle(games.begin(), games.end(), rng);
+//		swapCount++;  // Increment swap count for each shuffle
+//		cout << "Number of shuffles (swaps): " << swapCount << endl;
+//	}
+//
+//	cout << "Number of shuffles (swaps): " << swapCount << endl;
+//}
 
 void textConfig (sf::Text &text, sf::Font &font, int size, float x, float y) {
 	text.setFont(font);
@@ -291,7 +291,7 @@ void setText (sf::Text &text) {
 }
 
 int main() {
-	string filePath = "../vgsales.csv"; // not working yet idk whats wrong
+	string filePath = "../vgsales.csv";
 	vector<Game> gamesVector = parseCSV(filePath); //Games get added here after data is parsed
 	vector<Game> userVector; //This is the vector that will be sorted and returned
 	string sortType; //This should be either NA, EU, JP, or Other
@@ -422,7 +422,7 @@ int main() {
 	text34.setString("North America");
 	text35.setString("Europe");
 	text36.setString("Japan");
-	text37.setString("Other/All");
+	text37.setString("Other");
 	text38.setString("Please select one of the following regions");
 	text34.setColor(sf::Color::Black);
 	text35.setColor(sf::Color::Black);
@@ -1402,8 +1402,8 @@ int main() {
 	auto mergeStart = high_resolution_clock::now();
 	mergeSort(userVector, sortType, 0, userVector.size() - 1);
 	auto mergeStop = high_resolution_clock::now();
-	auto mergeTime = duration_cast<milliseconds>(mergeStop - mergeStart);
-	cout << "Merge Sort Took: " << mergeTime.count() << " milliseconds" << endl;
+	auto mergeTime = duration_cast<microseconds>(mergeStop - mergeStart);
+	cout << "Merge Sort Took: " << mergeTime.count() << " microseconds" << endl;
 	if (userVector.size() < 20) {
 		int count = 1;
 		for (auto itr = userVector.begin(); itr != userVector.end(); itr++) {
@@ -1419,8 +1419,8 @@ int main() {
 	auto quicksortStart = high_resolution_clock::now();
 	quicksort(userVector, 0, userVector.size() - 1, sortType);
 	auto quicksortStop = high_resolution_clock::now();
-	auto quicksortTime = duration_cast<milliseconds>(quicksortStop - quicksortStart);
-	cout << "Quicksort Took: " << quicksortTime.count() << " milliseconds" << endl;
+	auto quicksortTime = duration_cast<microseconds>(quicksortStop - quicksortStart);
+	cout << "Quicksort Took: " << quicksortTime.count() << " microseconds" << endl;
 	if (userVector.size() < 20) {
 		int count = 1;
 		for (auto itr = userVector.begin(); itr != userVector.end(); itr++) {
@@ -1598,8 +1598,8 @@ int main() {
 	else
 		text72.setString("20. ");
 
-	text73.setString("Quicksort Took: " + to_string(quicksortTime.count()) + " milliseconds");
-	text74.setString("Merge Sort Took: " + to_string(mergeTime.count()) + " milliseconds");
+	text73.setString("Quicksort Took: " + to_string(quicksortTime.count()) + " microseconds");
+	text74.setString("Merge Sort Took: " + to_string(mergeTime.count()) + " microseconds");
 	setText(text73);
 	setText(text74);
 	texts4.push_back(text53);
